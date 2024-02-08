@@ -4,6 +4,11 @@ import undetected_chromedriver as uc
 from bs4 import BeautifulSoup
 
 def get_proxies() -> list:
+    """Reads proxies from sslproxies.org and returns them as a list.
+
+    Returns:
+        list: List of free proxies.
+    """
     response = requests.get('https://www.sslproxies.org/')
     soup = BeautifulSoup(response.text,"html.parser")
     proxies = []
@@ -19,9 +24,25 @@ def get_proxies() -> list:
     return proxies
 
 def get_random_proxy(proxies: list) -> str:
+    """Gets random proxy.
+
+    Args:
+        proxies (list): List with proxies.
+
+    Returns:
+        str: Selected proxy.
+    """
     return random.choice(proxies)
 
 def create_driver(proxies: list) -> uc.Chrome:
+    """Creates undetected ChromeDriver with selected proxy.
+
+    Args:
+        proxies (list): List of proxies.
+
+    Returns:
+        uc.Chrome: Created ChromeDriver.
+    """
     proxy = get_random_proxy(proxies)
     
     chrome_options = uc.ChromeOptions()
