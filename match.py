@@ -7,11 +7,22 @@ import undetected_chromedriver as uc
 from typing import Union
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 from utils import create_driver, get_proxies, generate_sleep_times
 
 PROXIES  = get_proxies()
 SLEEP_TIMES = generate_sleep_times()
+MOVES = [
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/match-summary/match-summary',
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/h2h/overall',
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/standings/table/overall',
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/standings/top_scorers',
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/standings/form/overall/5',
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/h2h/home',
+    'https://www.flashscore.com/match/PLACE_FOR_ID/#/h2h/away',
+]
 
 class Match():
     def __init__(self, id: str):
@@ -46,10 +57,11 @@ class Match():
         driver = create_driver(PROXIES)
         driver.get(self.url)
         time.sleep(random.choice(SLEEP_TIMES))
+        driver.find_element(By.XPATH, '//*[@id="onetrust-accept-btn-handler"]').click()
         
         # get page content
         page_soup = BeautifulSoup(driver.page_source, 'lxml')
-        
+        self.random_move(driver)
         # get teams and match time
         self.get_teams_time(page_soup)
         # get score
@@ -60,12 +72,14 @@ class Match():
         self.move_to_lineups_tab(driver)
         # get lineups page content
         page_soup = BeautifulSoup(driver.page_source, 'lxml')
+        self.random_move(driver)
         # get coaches info
         self.get_coaches_info(page_soup)
         # move to odds tab
         self.move_to_odds_tab(driver)
         # get odds page content
         page_soup = BeautifulSoup(driver.page_source, 'lxml')
+        self.random_move(driver)
         # get odds info
         self.get_odds(page_soup)
         
@@ -136,7 +150,7 @@ class Match():
         Args:
             driver (uc.Chrome): Chrome driver.
         """
-        driver.find_element(By.CSS_SELECTOR, "[href='#/match-summary/lineups']").click()
+        driver.get(f"https://www.flashscore.com/match/{self.id}/#/match-summary/lineups")
         time.sleep(random.choice(SLEEP_TIMES))
         
     def move_to_odds_tab(self, driver: uc.Chrome):
@@ -145,5 +159,10 @@ class Match():
         Args:
             driver (uc.Chrome): Chrome driver
         """
-        driver.find_element(By.CSS_SELECTOR, "[href='#/odds-comparison']").click()
+        driver.get(f"https://www.flashscore.com/match/{self.id}/#/odds-comparison/1x2-odds/full-time")
         time.sleep(random.choice(SLEEP_TIMES))
+        
+    def random_move(self, driver: uc.Chrome):
+        if random.random() > 0.5:
+            driver.get(random.choice(MOVES))
+            time.sleep(random.choice(SLEEP_TIMES) - 3)
