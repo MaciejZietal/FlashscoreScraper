@@ -2,6 +2,8 @@ import re
 import time
 import random
 
+import pandas as pd
+
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 
@@ -18,6 +20,11 @@ class Match():
         
     def generate_url(self):
         self.url = f'https://www.flashscore.com/match/{self.id}/#/match-summary/match-statistics/0'
+        
+    def get_match_info(self, as_df: bool=True):
+        if as_df:
+            return pd.DataFrame(self.match_info, index=[self.id])
+        return self.match_info
         
     def get_match_info(self):
         driver = create_driver(PROXIES)
