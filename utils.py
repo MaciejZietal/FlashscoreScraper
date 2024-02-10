@@ -53,3 +53,11 @@ def create_driver(proxies: list) -> uc.Chrome:
     driver.maximize_window()
 
     return driver
+
+def generate_sleep_times() -> list:
+    """Generates list of 100 sleep times between 3.5 and 8.
+
+    Returns:
+        list: List of sleep times.
+    """
+    return [random.uniform(3.5, 8) for _ in range(100)]
