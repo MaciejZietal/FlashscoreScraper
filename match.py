@@ -20,6 +20,7 @@ class Match():
     def get_match_info(self):
         driver = create_driver(PROXIES)
         driver.get(self.url)
+        time.sleep(3)
         
         # get page content
         page_soup = BeautifulSoup(driver.page_source, 'lxml')
@@ -80,11 +81,9 @@ class Match():
         self.match_info['odds_A'] = odds_text[8:]
             
     def move_to_lineups_tab(self, driver):
-        lineups_button = driver.find_element(By.XPATH, '//*[@id="detail"]/div[7]/div/a[3]')
-        driver.execute_script('arguments[0].click();', lineups_button)
+        driver.find_element(By.CSS_SELECTOR, "[href='#/match-summary/lineups']").click()
         time.sleep(3)
         
     def move_to_odds_tab(self, driver):
-        odds_button = driver.find_element(By.XPATH, '//*[@id="detail"]/div[6]/div/a[2]/button')
-        driver.execute_script('arguments[0].click();', odds_button)
+        driver.find_element(By.CSS_SELECTOR, "[href='#/odds-comparison']").click()
         time.sleep(3)
