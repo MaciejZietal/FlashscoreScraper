@@ -5,9 +5,10 @@ import random
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
 
-from utils import create_driver, get_proxies
+from utils import create_driver, get_proxies, generate_sleep_times
 
 PROXIES  = get_proxies()
+SLEEP_TIMES = generate_sleep_times()
 
 class Match():
     def __init__(self, id: str):
@@ -21,7 +22,7 @@ class Match():
     def get_match_info(self):
         driver = create_driver(PROXIES)
         driver.get(self.url)
-        time.sleep(random.choice([3, 4, 5, 6]))
+        time.sleep(random.choice(SLEEP_TIMES))
         
         # get page content
         page_soup = BeautifulSoup(driver.page_source, 'lxml')
@@ -83,8 +84,8 @@ class Match():
             
     def move_to_lineups_tab(self, driver):
         driver.find_element(By.CSS_SELECTOR, "[href='#/match-summary/lineups']").click()
-        time.sleep(random.choice([3, 4, 5, 6]))
+        time.sleep(random.choice(SLEEP_TIMES))
         
     def move_to_odds_tab(self, driver):
         driver.find_element(By.CSS_SELECTOR, "[href='#/odds-comparison']").click()
-        time.sleep(random.choice([3, 4, 5, 6]))
+        time.sleep(random.choice(SLEEP_TIMES))
