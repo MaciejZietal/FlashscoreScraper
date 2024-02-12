@@ -81,7 +81,7 @@ class Scraper():
         # get ids
         id_list = []
         for id in WebDriverWait(driver, 30).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, '[id^=g_1_]'))):
-            single_id = id.get_attribute("id").strip("g_1_")
+            single_id = id.get_attribute("id").split('g_1_')[1]
             id_list.append(single_id)
             
         driver.quit()
