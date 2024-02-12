@@ -10,9 +10,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
-from utils import generate_sleep_times
-
-SLEEP_TIMES = generate_sleep_times()
 MOVES = [
     'https://www.flashscore.com/match/PLACE_FOR_ID/#/match-summary/match-summary',
     'https://www.flashscore.com/match/PLACE_FOR_ID/#/h2h/overall',
@@ -80,7 +77,7 @@ class Match():
         """Generates match information by scraping teams and match time, score, match statistics, coach information and odds.
         """
         self.driver.get(self.url)
-        time.sleep(random.choice(SLEEP_TIMES))
+        time.sleep(random.uniform(3, 5))
         self.accept_cookies()
 
         # get page content
@@ -171,18 +168,18 @@ class Match():
         """Moves ChromeDriver to lineups tab.
         """
         self.driver.get(f"https://www.flashscore.com/match/{self.id}/#/match-summary/lineups")
-        time.sleep(random.choice(SLEEP_TIMES))
+        time.sleep(random.uniform(3, 5))
 
     def move_to_odds_tab(self):
         """Moves ChromeDriver to odds tab.
         """
         self.driver.get(f"https://www.flashscore.com/match/{self.id}/#/odds-comparison/1x2-odds/full-time")
-        time.sleep(random.choice(SLEEP_TIMES))
+        time.sleep(random.uniform(3, 5))
 
     def random_move(self):
         if random.random() > 0.5:
             self.driver.get(random.choice(MOVES).replace('PLACE_FOR_ID', self.id))
-            time.sleep(random.choice(SLEEP_TIMES) - 3.4)
+            time.sleep(random.uniform(0.5, 1.5))
 
     def accept_cookies(self):
         try:
