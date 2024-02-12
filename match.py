@@ -25,27 +25,27 @@ MOVES = [
     'https://www.flashscore.com/football/england/premier-league/',
     'https://www.flashscore.com/football/england/premier-league/archive/',
     'https://www.flashscore.com/football/england/premier-league/news/',
-    'https://www.flashscore.com/football/england/premier-league/results/'
+    'https://www.flashscore.com/football/england/premier-league/results/',
     'https://www.flashscore.com/football/france/ligue-1/',
     'https://www.flashscore.com/football/france/ligue-1/archive/',
     'https://www.flashscore.com/football/france/france/news/',
-    'https://www.flashscore.com/football/france/france/results/'
+    'https://www.flashscore.com/football/france/france/results/',
     'https://www.flashscore.com/football/germany/bundesliga/',
     'https://www.flashscore.com/football/germany/bundesliga/archive/',
     'https://www.flashscore.com/football/germany/germany/news/',
-    'https://www.flashscore.com/football/germany/germany/results/'
+    'https://www.flashscore.com/football/germany/germany/results/',
     'https://www.flashscore.com/football/italy/serie-a/',
     'https://www.flashscore.com/football/italy/serie-a/archive/',
     'https://www.flashscore.com/football/italy/italy/news/',
-    'https://www.flashscore.com/football/italy/italy/results/'
+    'https://www.flashscore.com/football/italy/italy/results/',
     'https://www.flashscore.com/football/spain/laliga/',
     'https://www.flashscore.com/football/spain/laliga/archive/',
     'https://www.flashscore.com/football/spain/laliga/news/',
-    'https://www.flashscore.com/football/spain/laliga/results/'
+    'https://www.flashscore.com/football/spain/laliga/results/',
     'https://www.flashscore.com/football/turkey/super-lig/',
     'https://www.flashscore.com/football/turkey/super-lig/archive/',
     'https://www.flashscore.com/football/turkey/super-lig/news/',
-    'https://www.flashscore.com/football/turkey/super-lig/results/'
+    'https://www.flashscore.com/football/turkey/super-lig/results/',
 ]
 
 class Match():
