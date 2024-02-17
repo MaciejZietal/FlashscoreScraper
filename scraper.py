@@ -14,10 +14,11 @@ from match import Match
 PROXIES  = get_proxies()
 
 class Scraper():
-    def __init__(self, country: str, division: str, season: str):
+    def __init__(self, country: str, division: str, season: str, output_path: str):
         self.country = country
         self.division = division
         self.season = season
+        self.output_path = output_path
         self.matches_stats = []
         self.matches_with_errors = []
         
@@ -26,7 +27,7 @@ class Scraper():
         id_list = self.get_all_matches_ids(url)
         random.shuffle(id_list)
         driver = create_driver(PROXIES)
-        for id in random.choices(id_list, k=20):
+        for id in id_list:
             single_match = Match(id, driver)
             try:
                 single_match.generate_match_info()
@@ -42,7 +43,8 @@ class Scraper():
                 
         driver.quit()
         
-        return pd.concat(self.matches_stats)
+        data = pd.concat(self.matches_stats)
+        data.to_csv(self.output_path)
         
     def generate_league_url(self) -> str:
         """Generate link to league results.
