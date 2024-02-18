@@ -49,7 +49,7 @@ def create_driver(proxies: list) -> uc.Chrome:
     chrome_options.headless = False
     seleniumwire_options = {'proxy': {'https': f'type://{proxy}',}}
 
-    driver = uc.Chrome(options=chrome_options, seleniumwire_options=seleniumwire_options)
+    driver = uc.Chrome(options=chrome_options, seleniumwire_options=seleniumwire_options, version_main=120)
     driver.maximize_window()
 
     return driver
