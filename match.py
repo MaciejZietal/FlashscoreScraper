@@ -132,7 +132,7 @@ class Match():
         Args:
             page_soup (BeautifulSoup): HTML match statistics page content.
         """
-        content = page_soup.find_all('div', {'class': '_row_rz3ch_9'})
+        content = page_soup.find_all('div', {'class': '_row_1csk6_9'})
 
         for i in range(len(content)):
             name = "".join(re.split("[^a-zA-Z]*", content[i].text))
