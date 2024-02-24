@@ -125,6 +125,9 @@ class Match():
         home_goals, away_goals = re.findall(r'\d+', score)
         self.match_info['home_goals'] = int(home_goals)
         self.match_info['away_goals'] = int(away_goals)
+        # round info
+        round = page_soup.find('div', {'class': 'tournamentHeader__sportContent tournamentHeader__sportNavWrapper'})
+        self.match_info['Round'] = round.find_all('a')[1].text
 
     def get_stats(self, page_soup: BeautifulSoup):
         """Scrape all statistics.
