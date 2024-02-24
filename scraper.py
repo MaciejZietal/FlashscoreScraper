@@ -36,7 +36,7 @@ class Scraper():
             self.matches_stats.append(single_match.get_match_info())
             
             # change driver if generated number is greater than 0.75
-            if random.random() > 0.75:
+            if random.random() > 0.85:
                 driver.quit()
                 driver = create_driver(PROXIES)
                 time.sleep(1)
